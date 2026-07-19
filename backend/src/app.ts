@@ -4,4 +4,8 @@ const app = express();
 
 app.use(express.json());
 
+import authRouter from "./routes/auth.route";
+
+app.use("/api/v1/user", authRouter);
+
 export { app };
