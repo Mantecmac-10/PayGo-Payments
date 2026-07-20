@@ -3,6 +3,7 @@ import User from "../models/User";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { config } from "../config/env";
+import Account from "../models/Account";
 
 export const handleRegister = async (req: Request, res: Response) => {
   try {
@@ -28,11 +29,24 @@ export const handleRegister = async (req: Request, res: Response) => {
       lastName,
     });
 
+    const randomBalance = Math.floor(Math.random() * (10000 - 1000 + 1)) + 1000;
+
+    const account = await Account.create({
+      userId: user._id,
+      balance: randomBalance,
+    });
+
     const result = await User.findOne({ username }).select("-password");
 
-    return res.status(201).send({ message: "User Created!", result });
+    return res
+      .status(201)
+      .json({ message: "User Created!", result, balance: account.balance });
   } catch (error) {
-    console.error("Server Error", error);
+    console.error(error);
+
+    return res.status(500).json({
+      message: "Internal Server Error",
+    });
   }
 };
 
@@ -58,9 +72,12 @@ export const handleLogin = async (req: Request, res: Response) => {
       config.json_key,
     );
 
-    return res.status(200).send({ message: "User Logged In!", token });
+    return res.status(200).json({ message: "User Logged In!", token });
   } catch (error) {
-    console.error("Server Error", error);
+    console.error(error);
+
+    return res.status(500).json({
+      message: "Internal Server Error",
+    });
   }
 };
-

@@ -28,9 +28,13 @@ export const updateUser = async (req: Request, res: Response) => {
 
     const newDetail = await User.findById(userId).select("-password");
 
-    return res.status(200).send({ message: "User Updated!", newDetail });
+    return res.status(200).json({ message: "User Updated!", newDetail });
   } catch (error) {
-    console.error("Server Error", error);
+    console.error(error);
+
+    return res.status(500).json({
+      message: "Internal Server Error",
+    });
   }
 };
 
@@ -42,8 +46,12 @@ export const listUser = async (req: Request, res: Response) => {
       username: { $regex: filter, $options: "i" },
     }).select("username");
 
-    return res.status(200).send({ users });
+    return res.status(200).json({ users });
   } catch (error) {
-    console.error("Server Error", error);
+    console.error(error);
+
+    return res.status(500).json({
+      message: "Internal Server Error",
+    });
   }
 };
