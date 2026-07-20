@@ -1,7 +1,7 @@
-import mongoose, { Document, Schema, type ObjectId } from "mongoose";
+import mongoose, { Document, Schema, Types, type ObjectId } from "mongoose";
 
 export interface Iaccount extends Document {
-  userId: Schema.Types.ObjectId;
+  userId: Types.ObjectId;
   balance: number;
   updatedAt: Date;
 }
@@ -9,7 +9,7 @@ export interface Iaccount extends Document {
 const accoutSchema = new Schema<Iaccount>(
   {
     userId: {
-      type: Schema.Types.ObjectId,
+      type: Types.ObjectId,
       ref: "User",
       required: true,
     },
