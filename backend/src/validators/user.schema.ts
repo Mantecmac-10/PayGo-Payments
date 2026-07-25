@@ -12,7 +12,7 @@ export const updateSchema = z.object({
     .min(2, "First name must be at least 2 characters")
     .max(50, "First name must be under 50 characters"),
 
-  lastName: z
+  LastName: z
     .string()
     .min(2, "Last name must be at least 2 characters")
     .max(50, "Last name must be under 50 characters"),

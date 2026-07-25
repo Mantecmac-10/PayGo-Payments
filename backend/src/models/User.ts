@@ -5,7 +5,7 @@ export interface Iuser extends Document {
   email: string;
   password: string;
   firstName: string;
-  lastName: string;
+  LastName: string;
   createdAt: Date;
 }
 
@@ -33,9 +33,8 @@ const userSchema = new Schema<Iuser>(
       required: true,
       trim: true,
     },
-    lastName: {
+    LastName: {
       type: String,
-      required: true,
       trim: true,
     },
   },

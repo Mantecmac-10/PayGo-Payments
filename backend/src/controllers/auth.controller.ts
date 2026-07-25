@@ -7,7 +7,7 @@ import Account from "../models/Account";
 
 export const handleRegister = async (req: Request, res: Response) => {
   try {
-    const { username, email, password, firstName, lastName } = req.body;
+    const { username, email, password, firstName, LastName } = req.body;
 
     const emailExist = await User.findOne({ email });
     if (emailExist) {
@@ -26,7 +26,7 @@ export const handleRegister = async (req: Request, res: Response) => {
       email,
       password: hashedPassword,
       firstName,
-      lastName,
+      LastName,
     });
 
     const randomBalance = Math.floor(Math.random() * (10000 - 1000 + 1)) + 1000;
