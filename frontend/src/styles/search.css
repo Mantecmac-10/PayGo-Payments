@@ -1,0 +1,127 @@
+* {
+    box-sizing: border-box;
+}
+
+.search-page {
+    min-height: 100vh;
+    background: #f4f7fb;
+    padding: 40px 20px;
+}
+
+.search-container {
+    max-width: 800px;
+    margin: auto;
+}
+
+.search-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 8px;
+}
+
+.search-subtitle {
+    color: #6b7280;
+    margin-bottom: 30px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 12px;
+    outline: none;
+    transition: 0.25s;
+    margin-bottom: 30px;
+}
+
+.search-input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.user-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.user-card {
+    background: white;
+    border-radius: 14px;
+    padding: 18px 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    transition: 0.2s;
+}
+
+.user-card:hover {
+    transform: translateY(-2px);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #2563eb;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.user-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.user-username {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.send-btn {
+    padding: 10px 22px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+.send-btn:hover {
+    background: #1d4ed8;
+}
+
+.empty-state {
+    text-align: center;
+    color: #6b7280;
+    margin-top: 40px;
+    font-size: 18px;
+}
+
+@media (max-width: 650px) {
+    .user-card {
+        flex-direction: column;
+        gap: 16px;
+        align-items: flex-start;
+    }
+
+    .send-btn {
+        width: 100%;
+    }
+}

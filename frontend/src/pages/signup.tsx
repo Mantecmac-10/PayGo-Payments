@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { signup } from "../api/auth";
+import "../styles/auth.css";
 
 export function Signup() {
   const usernameRef = useRef<HTMLInputElement | null>(null);
@@ -58,50 +59,67 @@ export function Signup() {
   };
   return (
     <>
-      <div>
-        <h1>Sign Up</h1>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label>Username </label>
-            <input
-              ref={usernameRef}
-              type="text"
-              placeholder="Enter Unique Username"
-            />
-          </div>
+      <div className="auth-page">
+        <div className="auth-card">
+          <h1 className="logo">PayGo</h1>
 
-          <div>
-            <label>Email </label>
-            <input ref={emailRef} type="text" placeholder="Enter Email" />
-          </div>
+          <h2 className="auth-title">Create Account</h2>
 
-          <div>
-            <label>Password </label>
-            <input ref={passwordRef} type="text" placeholder="Enter Password" />
-          </div>
+          <p className="auth-subtitle">Start sending money instantly.</p>
 
-          <div>
-            <label>First Name </label>
-            <input
-              ref={firstNameRef}
-              type="text"
-              placeholder="Enter First Name"
-            />
-          </div>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label>Username </label>
+              <input
+                ref={usernameRef}
+                type="text"
+                placeholder="Enter Unique Username"
+              />
+            </div>
 
-          <div>
-            <label>Last Name </label>
-            <input
-              ref={LastNameRef}
-              type="text"
-              placeholder="Enter Last Name"
-            />
-          </div>
+            <div className="form-group">
+              <label>Email </label>
+              <input ref={emailRef} type="text" placeholder="Enter Email" />
+            </div>
 
-          {error && <p className="text-sm text-red-600">{error}</p>}
+            <div className="form-group">
+              <label>Password </label>
+              <input
+                ref={passwordRef}
+                type="text"
+                placeholder="Enter Password"
+              />
+            </div>
 
-          <button type="submit">Submit</button>
-        </form>
+            <div className="form-group">
+              <label>First Name </label>
+              <input
+                ref={firstNameRef}
+                type="text"
+                placeholder="Enter First Name"
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Last Name </label>
+              <input
+                ref={LastNameRef}
+                type="text"
+                placeholder="Enter Last Name"
+              />
+            </div>
+
+            {error && <p className="text-sm text-red-600">{error}</p>}
+
+            <button type="submit" className="auth-btn">
+              Submit
+            </button>
+          </form>
+          <p className="auth-footer">
+            Already have an account?
+            <a href="/signin"> Sign In</a>
+          </p>
+        </div>
       </div>
     </>
   );

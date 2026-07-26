@@ -1,0 +1,115 @@
+import { useState } from "react";
+import { updateUser, verifyUser } from "../api/user";
+import "../styles/update.css";
+
+export const UpdateUser = () => {
+  const [verified, setVerified] = useState(false);
+
+  const [oldPassword, setOldPassword] = useState("");
+
+  const [firstName, setFirstName] = useState("");
+  const [LastName, setLastName] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+
+  const [message, setMessage] = useState("");
+
+  const handleVerify = async () => {
+    try {
+      await verifyUser(oldPassword);
+
+      setVerified(true);
+      setMessage("");
+    } catch (error: any) {
+      setMessage(error.response?.data?.message || "Wrong password");
+    }
+  };
+
+  const handleUpdate = async () => {
+    try {
+      const data = await updateUser({
+        oldPassword,
+        newPassword,
+        firstName,
+        LastName,
+      });
+
+      setMessage(data.message);
+
+      setNewPassword("");
+    } catch (error: any) {
+      setMessage(error.response?.data || "Update failed");
+    }
+  };
+
+  return (
+    <div className="update-page">
+      <div className="update-card">
+        <h1>Update Profile</h1>
+
+        {!verified ? (
+          <>
+            <p className="subtitle">Enter your current password to continue</p>
+
+            <div className="form-group">
+              <label>Current Password</label>
+
+              <input
+                type="password"
+                placeholder="Enter old password"
+                value={oldPassword}
+                onChange={(e) => setOldPassword(e.target.value)}
+              />
+            </div>
+
+            <button className="update-btn" onClick={handleVerify}>
+              Continue
+            </button>
+          </>
+        ) : (
+          <>
+            <p className="subtitle">Update your account details</p>
+
+            <div className="form-group">
+              <label>First Name</label>
+
+              <input
+                type="text"
+                placeholder="Enter first name"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Last Name</label>
+
+              <input
+                type="text"
+                placeholder="Enter last name"
+                value={LastName}
+                onChange={(e) => setLastName(e.target.value)}
+              />
+            </div>
+
+            <div className="form-group">
+              <label>New Password</label>
+
+              <input
+                type="password"
+                placeholder="Enter new password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+              />
+            </div>
+
+            <button className="update-btn" onClick={handleUpdate}>
+              Update Account
+            </button>
+          </>
+        )}
+
+        {message && <p className="message">{message}</p>}
+      </div>
+    </div>
+  );
+};

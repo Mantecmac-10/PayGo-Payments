@@ -5,12 +5,14 @@ import { verifyUser } from "../middlewares/auth.middleware";
 import { validate } from "../middlewares/validate";
 import { signinSchema, signupSchema } from "../validators/auth.schema";
 import { listUserSchema, updateSchema } from "../validators/user.schema";
+import { verifyPassword } from "../controllers/verifyPass";
 
 const router = Router();
 
 router.post("/signup", validate(signupSchema), handleRegister);
 router.post("/signin", validate(signinSchema), handleLogin);
-router.patch("/", verifyUser, validate(updateSchema), updateUser);
+router.post("/verify-pass", verifyUser, verifyPassword);
+router.patch("/update", verifyUser, validate(updateSchema), updateUser);
 router.get("/bulk", validate(listUserSchema, "query"), listUser);
 
 export default router;

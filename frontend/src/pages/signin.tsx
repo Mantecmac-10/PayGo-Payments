@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { signin } from "../api/auth";
+import "../styles/auth.css";
 
 export function Signin() {
   const usernameRef = useRef<HTMLInputElement | null>(null);
@@ -41,30 +42,43 @@ export function Signin() {
   };
   return (
     <>
-      <div>
-        <h1>Sign In</h1>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label>Username: </label>
-            <input
-              ref={usernameRef}
-              type="text"
-              placeholder="Put your Username"
-            />
-          </div>
+      <div className="auth-page">
+        <div className="auth-card">
+          <h1 className="logo">PayGo</h1>
 
-          <div>
-            <label>Password: </label>
-            <input
-              ref={passwordRef}
-              type="text"
-              placeholder="Put your Password"
-            />
-          </div>
-          {error && <p className="text-sm text-red-600">{error}</p>}
+          <h2 className="auth-title">Welcome Back</h2>
 
-          <button type="submit">Submit</button>
-        </form>
+          <p className="auth-subtitle">Sign in to continue.</p>
+
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label>Username: </label>
+              <input
+                ref={usernameRef}
+                type="text"
+                placeholder="Put your Username"
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Password: </label>
+              <input
+                ref={passwordRef}
+                type="text"
+                placeholder="Put your Password"
+              />
+            </div>
+            {error && <p className="text-sm text-red-600">{error}</p>}
+
+            <button type="submit" className="auth-btn">
+              Sign In
+            </button>
+          </form>
+          <p className="auth-footer">
+            Don't have an account?
+            <a href="/signup"> Sign Up</a>
+          </p>
+        </div>
       </div>
     </>
   );

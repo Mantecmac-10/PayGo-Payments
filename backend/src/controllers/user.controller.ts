@@ -6,7 +6,7 @@ export const updateUser = async (req: Request, res: Response) => {
   try {
     const userId = req.userId;
 
-    const { password, firstName, lastName } = req.body;
+    const { password, firstName, LastName } = req.body;
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -15,7 +15,7 @@ export const updateUser = async (req: Request, res: Response) => {
       {
         password: hashedPassword,
         firstName,
-        lastName,
+        LastName,
       },
       {
         returnDocument: "after",

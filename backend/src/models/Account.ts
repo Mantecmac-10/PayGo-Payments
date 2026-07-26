@@ -9,7 +9,7 @@ export interface Iaccount extends Document {
 const accoutSchema = new Schema<Iaccount>(
   {
     userId: {
-      type: Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
