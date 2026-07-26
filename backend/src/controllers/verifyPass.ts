@@ -10,7 +10,7 @@ export const verifyPassword = async (req: Request, res: Response) => {
       });
     }
 
-    const { password } = req.body;
+    const { currPassword } = req.body;
 
     const user = await User.findById(req.userId);
 
@@ -20,7 +20,7 @@ export const verifyPassword = async (req: Request, res: Response) => {
       });
     }
 
-    const isCorrect = await bcrypt.compare(password, user.password);
+    const isCorrect = await bcrypt.compare(currPassword, user.password);
 
     if (!isCorrect) {
       return res.status(400).json({

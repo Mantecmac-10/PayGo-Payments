@@ -7,13 +7,12 @@ export const getUser = async (filter: string) => {
   return response.data;
 };
 
-interface updateDate {
-  oldPassword: string;
-  newPassword: string;
+interface UpdateData {
+  password: string;
   firstName: string;
   LastName: string;
 }
-export const updateUser = async (data: updateDate) => {
+export const updateUser = async (data: UpdateData) => {
   const token = localStorage.getItem("token");
 
   const response = await api.patch("/user/update", data, {
@@ -25,13 +24,13 @@ export const updateUser = async (data: updateDate) => {
   return response.data;
 };
 
-export const verifyUser = async (password: string) => {
+export const verifyUser = async (currPassword: string) => {
   const token = localStorage.getItem("token");
 
   const { data } = await api.post(
     "/user/verify-pass",
     {
-      password,
+      currPassword,
     },
     {
       headers: {

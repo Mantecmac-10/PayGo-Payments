@@ -5,17 +5,18 @@ import "../styles/update.css";
 export const UpdateUser = () => {
   const [verified, setVerified] = useState(false);
 
-  const [oldPassword, setOldPassword] = useState("");
+  const [currentPassword, setCurrentPassword] = useState("");
+
+  const [password, setNewPassword] = useState("");
 
   const [firstName, setFirstName] = useState("");
   const [LastName, setLastName] = useState("");
-  const [newPassword, setNewPassword] = useState("");
 
   const [message, setMessage] = useState("");
 
   const handleVerify = async () => {
     try {
-      await verifyUser(oldPassword);
+      await verifyUser(currentPassword);
 
       setVerified(true);
       setMessage("");
@@ -27,17 +28,14 @@ export const UpdateUser = () => {
   const handleUpdate = async () => {
     try {
       const data = await updateUser({
-        oldPassword,
-        newPassword,
+        password,
         firstName,
         LastName,
       });
 
       setMessage(data.message);
-
-      setNewPassword("");
     } catch (error: any) {
-      setMessage(error.response?.data || "Update failed");
+      setMessage(error.response?.data?.message || "Update failed");
     }
   };
 
@@ -48,18 +46,14 @@ export const UpdateUser = () => {
 
         {!verified ? (
           <>
-            <p className="subtitle">Enter your current password to continue</p>
+            <p className="subtitle">Enter current password</p>
 
-            <div className="form-group">
-              <label>Current Password</label>
-
-              <input
-                type="password"
-                placeholder="Enter old password"
-                value={oldPassword}
-                onChange={(e) => setOldPassword(e.target.value)}
-              />
-            </div>
+            <input
+              type="password"
+              placeholder="Current password"
+              value={currentPassword}
+              onChange={(e) => setCurrentPassword(e.target.value)}
+            />
 
             <button className="update-btn" onClick={handleVerify}>
               Continue
@@ -67,14 +61,10 @@ export const UpdateUser = () => {
           </>
         ) : (
           <>
-            <p className="subtitle">Update your account details</p>
-
             <div className="form-group">
               <label>First Name</label>
 
               <input
-                type="text"
-                placeholder="Enter first name"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
               />
@@ -84,8 +74,6 @@ export const UpdateUser = () => {
               <label>Last Name</label>
 
               <input
-                type="text"
-                placeholder="Enter last name"
                 value={LastName}
                 onChange={(e) => setLastName(e.target.value)}
               />
@@ -96,8 +84,8 @@ export const UpdateUser = () => {
 
               <input
                 type="password"
-                placeholder="Enter new password"
-                value={newPassword}
+                placeholder="New password"
+                value={password}
                 onChange={(e) => setNewPassword(e.target.value)}
               />
             </div>
